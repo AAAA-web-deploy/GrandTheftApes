@@ -81,7 +81,7 @@
   updateMotionButton();
   let activeCollection=0, activeImage=0;
   const nameOf = file => file.slice(3).replaceAll('_',' ');
-  const pathOf = (group,index) => `assets-gallery/${group.folder}/${group.files[index]}.png`;
+  const pathOf = (group,index) => `assets-gallery/${group.folder}/${group.files[index]}.jpg`;
   function showImage(groupIndex,index) {
     activeCollection=groupIndex;activeImage=index;
     const group=collections[groupIndex];
@@ -104,7 +104,7 @@
     const originalCards=[];
     group.files.forEach((file,index)=>{
       const card=document.createElement('button');card.className='art-card';card.type='button';card.setAttribute('aria-label',`Open ${group.title}: ${nameOf(file)}`);
-      const img=document.createElement('img');img.loading='lazy';img.src=pathOf(group,index);img.alt='';card.append(img);
+      const img=document.createElement('img');img.loading='lazy';img.decoding='async';img.src=pathOf(group,index);img.alt='';card.append(img);
       if (groupIndex===0 && (index===0 || index===1)) {const overlay=document.createElement('span');overlay.className='card-overlay';overlay.textContent=index===1?'WASTED':'★★★★★';if(index===0)overlay.classList.add('stars');card.append(overlay);}
       card.addEventListener('click',()=>showImage(groupIndex,index));track.append(card);originalCards.push(card);
     });

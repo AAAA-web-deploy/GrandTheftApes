@@ -6,11 +6,12 @@
   <meta name="description" content="Grand Theft Apes ($GTA) brings ape-powered chaos to Vice City, where neon nights, wild adventures, and diamond hands rule the streets.">
   <meta name="theme-color" content="#1a102d">
   <title>Grand Theft Apes | $GTA</title>
-  <link rel="stylesheet" href="styles.css?v=8">
+  <link rel="preload" as="image" href="assets-hero/hero.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
   <header class="site-header" id="top">
-    <a class="wordmark" href="#top"><img src="assets-hero/grand_theft_apes_logo.png" alt=""><span class="token-name">GRAND THEFT APES <strong>($GTA)</strong></span></a>
+    <a class="wordmark" href="#top"><img src="assets-hero/logo.webp" alt="" decoding="async"><span class="token-name">GRAND THEFT APES <strong>($GTA)</strong></span></a>
     <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
     <nav class="navigation" id="main-nav" aria-label="Main navigation">
       <a href="#about">ABOUT</a><a href="#how-to-buy">HOW TO BUY</a><a href="#tokenomics">TOKENOMICS</a><a href="#artwork">ARTWORK</a><a href="#communique">COMMUNIQUÉ</a>
@@ -20,10 +21,10 @@
 
   <main>
     <section class="hero" id="home" aria-labelledby="hero-title">
-      <img class="hero-image" src="assets-reference/ape-hero-original.png" alt="Two ape crew members overlooking a neon-lit coastal city at sunset">
+      <img class="hero-image" src="assets-hero/hero.jpg" alt="Two ape crew members overlooking a neon-lit coastal city at sunset" fetchpriority="high" decoding="async">
       <div class="hero-shade"></div>
       <div class="hero-bottom">
-        <h1 id="hero-title" class="hero-logo"><img src="assets-hero/grand_theft_apes_logo.png" alt="Grand Theft Apes"></h1>
+        <h1 id="hero-title" class="hero-logo"><img src="assets-hero/logo.webp" alt="Grand Theft Apes" decoding="async"></h1>
         <div class="hero-panel">
           <div class="hero-actions"><button class="buy-button hero-buy js-copy-ca" type="button">COPY CA</button><span class="social-divider" aria-hidden="true"></span><button class="social social-telegram js-social" data-social="telegram" type="button" aria-label="Telegram"><img src="assets-icons/telegram.svg" alt=""></button><button class="social js-social" data-social="x" type="button" aria-label="X"><img src="assets-icons/x.svg" alt=""></button></div>
           <div class="home-ca">
@@ -37,7 +38,7 @@
     </section>
 
     <section class="about" id="about" aria-labelledby="about-title">
-      <img class="about-image" src="assets-hero/about_masked_ape_cinematic.png" alt="A heroic ape holding a Grand Theft Apes bandana">
+      <img class="about-image" src="assets-hero/about.jpg" alt="A heroic ape holding a Grand Theft Apes bandana" loading="lazy" decoding="async">
       <div class="about-shade"></div>
       <div class="about-content"><h2 id="about-title" class="about-heading" aria-label="About $GTA"><span>ABOUT</span><strong>$GTA</strong></h2><p><span class="desc-name">Grand Theft Apes ($GTA)</span> brings ape-powered chaos to <span class="desc-city">Vice City</span>, where neon nights, wild adventures, and diamond hands rule the streets.</p></div>
     </section>
@@ -69,6 +70,6 @@
     <section class="communique" id="communique" aria-labelledby="communique-title"><div class="comm-title"><h2 id="communique-title">COMMUNIQUÉ</h2><span></span></div><div class="announcement" id="release-timer"><img src="assets-icons/announcement.svg" alt=""><div class="timer-copy"><strong>GTA VI Release</strong><div class="timer-units"><span><b data-timer="days">00</b><small>DAYS</small></span><span><b data-timer="hours">00</b><small>HRS</small></span><span><b data-timer="minutes">00</b><small>MIN</small></span><span><b data-timer="seconds">00</b><small>SEC</small></span></div></div></div><div class="community"><h3>JOIN THE COMMUNITY</h3><div><button class="social js-social" data-social="telegram" type="button" aria-label="Telegram: coming soon" disabled><img src="assets-icons/telegram.svg" alt=""></button><button class="social js-social" data-social="x" type="button" aria-label="X: coming soon" disabled><img src="assets-icons/x.svg" alt=""></button></div></div></section>
   </main>
   <dialog class="lightbox" id="lightbox" aria-label="Artwork viewer"><div class="lightbox-inner"><button class="lightbox-close" type="button" aria-label="Close artwork">×</button><img id="lightbox-image" alt=""><p id="lightbox-caption"></p><div class="lightbox-controls"><button id="lightbox-previous" type="button">← Previous</button><span id="lightbox-count"></span><button id="lightbox-next" type="button">Next →</button></div></div></dialog>
-  <script src="config.js?v=9"></script><script src="app.js?v=9"></script><script src="visitor.js?v=9"></script>
+  <script src="config.js?v=10"></script><script src="app.js?v=10"></script><script src="visitor.js?v=10"></script>
 </body>
 </html>
