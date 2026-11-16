@@ -151,25 +151,62 @@
   if(releaseTimer){
     const parsed=/^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2})(?::(\d{2}))?)?/.exec(config.releaseAt||'2026-11-19T00:00:00');
     const releaseAt=parsed?new Date(+parsed[1],+parsed[2]-1,+parsed[3],+(parsed[4]||0),+(parsed[5]||0),+(parsed[6]||0)).getTime():new Date(2026,10,19).getTime();
-    const units={
-      days:releaseTimer.querySelector('[data-timer="days"]'),
-      hours:releaseTimer.querySelector('[data-timer="hours"]'),
-      minutes:releaseTimer.querySelector('[data-timer="minutes"]'),
-      seconds:releaseTimer.querySelector('[data-timer="seconds"]')
-    };
+    const units=['days','hours','minutes','seconds'].map(name=>releaseTimer.querySelector(`[data-timer="${name}"]`));
     const pad=value=>String(Math.max(0,value)).padStart(2,'0');
-    const tick=()=>{
+    const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const paint=card=>next=>{
+      card.querySelectorAll('b').forEach(node=>{node.textContent=next});
+    };
+    const flipCard=(card,next,delay)=>{
+      const upper=card.querySelector('.card-upper b');
+      const lower=card.querySelector('.card-lower b');
+      const front=card.querySelector('.flap-front b');
+      const back=card.querySelector('.flap-back b');
+      const flap=card.querySelector('.card-flap');
+      const current=upper.textContent;
+      const token=card._flip=(card._flip||0)+1;
+      const commit=()=>{
+        if(card._flip!==token) return;
+        if(reducedMotion||current===next){paint(card)(next);return;}
+        front.textContent=current;
+        back.textContent=next;
+        upper.textContent=next;
+        lower.textContent=current;
+        flap.classList.remove('is-flipping');
+        void flap.offsetWidth;
+        flap.classList.add('is-flipping');
+        const finish=()=>{
+          flap.removeEventListener('animationend',finish);
+          if(card._flip!==token) return;
+          lower.textContent=next;
+          front.textContent=next;
+          flap.classList.remove('is-flipping');
+        };
+        flap.addEventListener('animationend',finish);
+      };
+      if(delay) window.setTimeout(commit,delay);
+      else commit();
+    };
+    const tick=first=>{
       const left=releaseAt-Date.now();
       const total=Math.max(0,Math.floor(left/1000));
-      if(units.days) units.days.textContent=pad(Math.floor(total/86400));
-      if(units.hours) units.hours.textContent=pad(Math.floor(total/3600)%24);
-      if(units.minutes) units.minutes.textContent=pad(Math.floor(total/60)%60);
-      if(units.seconds) units.seconds.textContent=pad(total%60);
+      const values=[
+        pad(Math.floor(total/86400)),
+        pad(Math.floor(total/3600)%24),
+        pad(Math.floor(total/60)%60),
+        pad(total%60)
+      ];
+      values.forEach((value,index)=>{
+        const card=units[index];
+        if(!card) return;
+        if(first) paint(card)(value);
+        else if(card.querySelector('.card-upper b').textContent!==value) flipCard(card,value,(3-index)*90);
+      });
       const label=releaseTimer.querySelector('strong');
       if(label) label.textContent=left<=0?'GTA VI IS LIVE':'GTA VI Release';
     };
-    tick();
-    window.setInterval(tick,1000);
+    tick(true);
+    window.setInterval(()=>tick(false),1000);
   }
   const siteVideos=document.querySelectorAll('.video-section video');
   siteVideos.forEach(video=>video.addEventListener('play',()=>{siteVideos.forEach(other=>{if(other!==video)other.pause()})}));
