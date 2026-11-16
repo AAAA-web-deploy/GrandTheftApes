@@ -158,27 +158,22 @@
       card.querySelectorAll('b').forEach(node=>{node.textContent=next});
     };
     const flipCard=(card,next,delay)=>{
-      const upper=card.querySelector('.card-upper b');
-      const lower=card.querySelector('.card-lower b');
+      const sheet=card.querySelector('.card-sheet b');
       const front=card.querySelector('.flap-front b');
-      const back=card.querySelector('.flap-back b');
       const flap=card.querySelector('.card-flap');
-      const current=upper.textContent;
+      const current=front.textContent;
       const token=card._flip=(card._flip||0)+1;
       const commit=()=>{
         if(card._flip!==token) return;
         if(reducedMotion||current===next){paint(card)(next);return;}
         front.textContent=current;
-        back.textContent=next;
-        upper.textContent=next;
-        lower.textContent=current;
+        sheet.textContent=next;
         flap.classList.remove('is-flipping');
         void flap.offsetWidth;
         flap.classList.add('is-flipping');
         const finish=()=>{
           flap.removeEventListener('animationend',finish);
           if(card._flip!==token) return;
-          lower.textContent=next;
           front.textContent=next;
           flap.classList.remove('is-flipping');
         };
@@ -200,7 +195,7 @@
         const card=units[index];
         if(!card) return;
         if(first) paint(card)(value);
-        else if(card.querySelector('.card-upper b').textContent!==value) flipCard(card,value,(3-index)*90);
+        else if(card.querySelector('.card-sheet b').textContent!==value) flipCard(card,value,(3-index)*90);
       });
       const label=releaseTimer.querySelector('strong');
       if(label) label.textContent=left<=0?'GTA VI IS LIVE':'GTA VI Release';
