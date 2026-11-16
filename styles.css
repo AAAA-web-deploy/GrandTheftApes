@@ -161,11 +161,11 @@ main,.site-header{max-width:none}
 @media(max-width:760px){
  .card-copy{width:36px;height:36px;padding:8px}
 }
-.hero-bottom{inset:0;align-items:center;justify-content:center;padding:0;gap:0}
+.hero-bottom{inset:0;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;padding:0 0 0 calc(48 * var(--u));gap:0}
 .hero-logo{width:min(46vw,calc(320 * var(--u)));height:calc(190 * var(--u));margin:0;transform:none}
 .hero-panel{position:absolute;left:50%;bottom:calc(16 * var(--u));transform:translateX(-50%);align-items:center}
 @media(max-width:760px){
- .hero-bottom{inset:0;align-items:center;justify-content:center;padding:0 16px 16px}
+ .hero-bottom{inset:0;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;padding:0 16px}
  .hero-logo{width:min(74vw,250px);height:150px;transform:none}
  .hero-panel{left:16px;right:16px;bottom:14px;width:auto;transform:none}
 }
