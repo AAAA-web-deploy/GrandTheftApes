@@ -21,6 +21,8 @@
     if (
       host === 'grandtheftapes.site' ||
       host === 'www.grandtheftapes.site' ||
+      host === 'grandtheftape.xyz' ||
+      host === 'www.grandtheftape.xyz' ||
       host === 'aaaa-web-deploy.github.io' ||
       host === '127.0.0.1' ||
       host === 'localhost'
